@@ -8,7 +8,7 @@
   KITTEN API
 </h1>
 
-Kitten API, a rest api that is built with nodejs, integrate with docker for developing this program. everyone who want to contribute or learn with this app pull request are allowed
+Kitten API, a rest api that's built with nodejs, integrate with docker for developing this program. everyone who want to contribute or learn with this app, pull request are allowed !!
 
 ## 🚀 Quick start (2 Options)
 
@@ -31,4 +31,4 @@ Kitten API, a rest api that is built with nodejs, integrate with docker for deve
 
 ## 💫 Deploy
 
-This app isn't deploy yet
+This app isn't deployed yet
