@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  api-kitten:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: api-kitten
+    container_name: api-kitten-con
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - MONGO_USERNAME=$MONGO_USERNAME
+      - MONGO_PASSWORD=$MONGO_PASSWORD
+      - MONGO_HOST=db
+      - MONGO_PORT=$MONGO_PORT
+      - MONGO_DB=$MONGO_DB
+    ports:
+      - "3001:3000"
+    networks:
+      - app-network
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    command: ./wait-for.sh db:27017 -- /home/node/app/node_modules/.bin/nodemon -L app
+  db:
+    image: mongo:latest
+    container_name: db
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+    networks:
+      - app-network
+    volumes:
+      - dbdata:/data/db
+    
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+  node_modules:
+
